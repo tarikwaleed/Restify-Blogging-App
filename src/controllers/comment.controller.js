@@ -1,7 +1,7 @@
-const Comment = require('../models/comment');
+const Comment = require('../models/comment.model');
 
 // Create a new comment
-export async function createComment(req, res) {
+ async function createComment(req, res) {
   try {
     const comment = new Comment(req.body);
     const newComment = await comment.save();
@@ -12,7 +12,7 @@ export async function createComment(req, res) {
 }
 
 // Get all comments
-export async function getAllComments(req, res) {
+ async function getAllComments(req, res) {
   try {
     const comments = await Comment.find();
     res.json(comments);
@@ -22,7 +22,7 @@ export async function getAllComments(req, res) {
 }
 
 // Get a single comment
-export async function getComment(req, res) {
+ async function getComment(req, res) {
   try {
     const comment = await Comment.findById(req.params.id);
     if (!comment) {
@@ -35,7 +35,7 @@ export async function getComment(req, res) {
 }
 
 // Update a comment
-export async function updateComment(req, res) {
+ async function updateComment(req, res) {
   try {
     const comment = await Comment.findById(req.params.id);
     if (!comment) {
@@ -50,7 +50,7 @@ export async function updateComment(req, res) {
 }
 
 // Delete a comment
-export async function deleteComment(req, res) {
+ async function deleteComment(req, res) {
   try {
     const comment = await Comment.findById(req.params.id);
     if (!comment) {
@@ -62,3 +62,5 @@ export async function deleteComment(req, res) {
     res.status(500).json({ message: err.message });
   }
 }
+
+module.exports={createComment,deleteComment,getAllComments,getComment,updateComment}

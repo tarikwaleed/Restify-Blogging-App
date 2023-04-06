@@ -1,7 +1,7 @@
 const Post = require('../models/post.model');
 
 // Create a new post
-export async function createPost(req, res) {
+ async function createPost(req, res) {
   try {
     const post = new Post(req.body);
     const newPost = await post.save();
@@ -12,7 +12,7 @@ export async function createPost(req, res) {
 }
 
 // Get all posts
-export async function getAllPosts(req, res) {
+ async function getAllPosts(req, res) {
   try {
     const posts = await Post.find();
     res.json(posts);
@@ -22,7 +22,7 @@ export async function getAllPosts(req, res) {
 }
 
 // Get a single post
-export async function getPost(req, res) {
+ async function getPost(req, res) {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
@@ -35,7 +35,7 @@ export async function getPost(req, res) {
 }
 
 // Update a post
-export async function updatePost(req, res) {
+ async function updatePost(req, res) {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
@@ -50,7 +50,7 @@ export async function updatePost(req, res) {
 }
 
 // Delete a post
-export async function deletePost(req, res) {
+ async function deletePost(req, res) {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) {
@@ -62,3 +62,4 @@ export async function deletePost(req, res) {
     res.status(500).json({ message: err.message });
   }
 }
+module.exports={createPost,getAllPosts,getPost,deletePost,updatePost}

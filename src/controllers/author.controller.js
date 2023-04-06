@@ -1,7 +1,7 @@
 const Author = require('../models/author.model');
 
 // Create a new author
-export async function createAuthor(req, res) {
+async function createAuthor(req, res) {
   try {
     const author = new Author(req.body);
     const newAuthor = await author.save();
@@ -12,7 +12,7 @@ export async function createAuthor(req, res) {
 }
 
 // Get all authors
-export async function getAllAuthors(req, res) {
+async function getAllAuthors(req, res) {
   try {
     const authors = await Author.find();
     res.json(authors);
@@ -22,7 +22,7 @@ export async function getAllAuthors(req, res) {
 }
 
 // Get a single author
-export async function getAuthor(req, res) {
+async function getAuthor(req, res) {
   try {
     const author = await Author.findById(req.params.id);
     if (!author) {
@@ -35,7 +35,7 @@ export async function getAuthor(req, res) {
 }
 
 // Update an author
-export async function updateAuthor(req, res) {
+async function updateAuthor(req, res) {
   try {
     const author = await Author.findById(req.params.id);
     if (!author) {
@@ -50,7 +50,7 @@ export async function updateAuthor(req, res) {
 }
 
 // Delete an author
-export async function deleteAuthor(req, res) {
+async function deleteAuthor(req, res) {
   try {
     const author = await Author.findById(req.params.id);
     if (!author) {
@@ -62,3 +62,5 @@ export async function deleteAuthor(req, res) {
     res.status(500).json({ message: err.message });
   }
 }
+
+module.exports = { createAuthor, getAllAuthors, getAuthor, updateAuthor, deleteAuthor };
